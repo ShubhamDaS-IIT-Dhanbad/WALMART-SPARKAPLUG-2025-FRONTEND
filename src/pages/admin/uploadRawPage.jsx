@@ -5,6 +5,7 @@ import { fetchAllFiles } from "../../../appwrite/admin/fetch_from_appwrite.js";
 import "../../styles/adminPage.css";
 
 const server = "https://bckd.onrender.com";
+// const server = "http://127.0.0.1:8000";
 // const server = "http://localhost:8000";
 const ITEMS_PER_PAGE = 5;
 
