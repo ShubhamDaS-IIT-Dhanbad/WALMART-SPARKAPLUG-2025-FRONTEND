@@ -1,16 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
-import { PulseLoader } from "react-spinners";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { ClipLoader } from "react-spinners";
+import Cookies from "js-cookie";
 
 import logo from "../../assets/iit-logo-light.png";
 import bot_icon from "../../assets/bot-icon.png";
 import user_icon from "../../assets/user-icon.png";
-
 import useChatApi from "../../hooks/useChatApi.jsx";
-import Cookies from "js-cookie";
 
 const ChatMessages = ({
   theme,
@@ -24,7 +23,6 @@ const ChatMessages = ({
 }) => {
   const inputRef = useRef(null);
   const { sendMessage, isLoading, error } = useChatApi();
-
   const [chatId, setChatId] = useState(() => {
     let id = Cookies.get("currentChatId");
     if (!id) {
@@ -43,6 +41,49 @@ const ChatMessages = ({
 
   const handleSuggestionClick = (question) => {
     handleSendSuggestion(question);
+  };
+
+  const [loadingStage, setLoadingStage] = useState("loading");
+
+  useEffect(() => {
+    if (isloading) {
+      const t1 = setTimeout(() => setLoadingStage("parsing"), 3000);
+      const t2 = setTimeout(() => setLoadingStage("thinking"), 6500);
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+      };
+    } else {
+      setLoadingStage("loading");
+    }
+  }, [isloading]);
+
+  const renderLoadingText = () => {
+    switch (loadingStage) {
+      case "loading":
+        return (
+          <>
+            Loading
+            <span className="dots" />
+          </>
+        );
+      case "parsing":
+        return (
+          <>
+            Parsing
+            <span className="dots" />
+          </>
+        );
+      case "thinking":
+        return (
+          <>
+            Thinking
+            <span className="dots" />
+          </>
+        );
+      default:
+        return null;
+    }
   };
 
   return (
@@ -74,9 +115,7 @@ const ChatMessages = ({
         </div>
       ) : (
         <div className={`chat-messages-${theme}`}>
-         
-
-          {messages?.map((msg, idx) => (
+          {messages.map((msg, idx) => (
             <div key={idx} style={{ padding: "20px" }}>
               {msg.type !== "user" && (
                 <div className={`bot-icon-div-${theme}`}>
@@ -87,14 +126,14 @@ const ChatMessages = ({
 
               <div
                 className={`chat-message-p-${theme} ${
-                  msg?.type === "user"
+                  msg.type === "user"
                     ? `user-chat-message-p-${theme}`
                     : `bot-chat-message-p-${theme}`
                 }`}
               >
                 <div
                   className={`chat-message-${theme} ${
-                    msg?.type === "user"
+                    msg.type === "user"
                       ? `user-message-${theme}`
                       : `bot-message-${theme}`
                   }`}
@@ -140,52 +179,52 @@ const ChatMessages = ({
                   })()}
                 </div>
 
-                {msg?.type === "user" && (
+                {msg.type === "user" && (
                   <div className={`user-icon-div-${theme}`}>
                     <img src={user_icon} alt="User icon" />
                   </div>
                 )}
               </div>
-
-
-
-              
             </div>
           ))}
 
-           {
-            (() => {
-              const lastMsg = messages[messages.length - 1];
-              const followUps = lastMsg?.follow_up_question || [];
-              if (followUps.length === 0) return null;
+          {/* Follow-up Suggestions */}
+          {(() => {
+            const lastMsg = messages[messages.length - 1];
+            const followUps = lastMsg?.follow_up_question || [];
+            if (followUps.length === 0) return null;
 
-              return (
-                <div className={`suggestions-${theme}`}>
-                  {followUps.map((question, index) => (
-                    <div
-                       key={index}
-                  className={`card-item-${theme}`}
-                  onClick={() => handleSuggestionClick(question)}
-                  style={{ cursor: "pointer" }}
-                    >
-                      <p>{question}</p>
-                    </div>
-                  ))}
+            return (
+              <div className={`suggestions-${theme}`}>
+                {followUps.map((question, index) => (
+                  <div
+                    key={index}
+                    className={`card-item-${theme}`}
+                    onClick={() => handleSuggestionClick(question)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <p>{question}</p>
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
+
+          {/* Loading Status */}
+          {(isloading || isLoading) && (
+            <div style={{ padding: "20px",marginTop:"30px" }}>
+              <div className={`bot-icon-div-${theme}`}>
+                <div className="bot-icon-loading">
+                  <img src={bot_icon} alt="Bot icon" />
                 </div>
-              );
-            })()}
-          {(isLoading || isloading) && (
-            <div className={`chat-loader-${theme}`}>
-              <PulseLoader
-                className={`chat-loading-${theme}`}
-                size={8}
-                color="#045acb"
-              />
+
+                <div className={`chat-loader-${theme} chat-loader`}>
+                  <div className="typing-animation">{renderLoadingText()}</div>
+                </div>
+              </div>
             </div>
           )}
 
-          {/* Follow-up Questions from the Last Bot Message */}
-          
           <div ref={messagesEndRef} />
         </div>
       )}
@@ -194,4 +233,3 @@ const ChatMessages = ({
 };
 
 export default ChatMessages;
-

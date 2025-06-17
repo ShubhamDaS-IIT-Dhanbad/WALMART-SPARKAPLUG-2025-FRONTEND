@@ -172,26 +172,25 @@
   border-radius: 4px;
 }
 
-.chat-loader-light {
-  text-align: center;
-  margin: 20px 0;
+
+
+
+
+
+
+
+.bot-icon-div-light {
+  display: flex;
+  gap: 10px;
 }
 
-
-
-
-
-
-
-
-.bot-icon-div-light{
-  display: flex;gap: 10px;
-
+.bot-icon-div-light p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.bot-icon-div-light p{
-  display: flex;justify-content: center;align-items: center;
-}
-.bot-icon-div-light img{
+
+.bot-icon-div-light img {
   width: 50px;
 }
 
@@ -283,4 +282,107 @@
     align-self: flex-end;
     margin-left: 5% !important;
   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Loader wrapper */
+.chat-loader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* Bot icon with rotating border animation */
+.bot-icon-loading {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;background-color: #ffffff;
+  height: 60px;border-radius: 50%;
+}
+
+.bot-icon-loading img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+/* Spinning border around the image */
+.bot-icon-loading::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 60%;
+  border: 1px solid #045acb;
+  border-top-color: transparent;
+  animation: spin 1.3s linear infinite;
+  z-index: 1;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Typing animation with blinking dot */
+.typing-animation {
+  font-size: 14px;
+  color: #4b5563; /* Tailwind's gray-600 equivalent */
+  display: flex;font-weight: 900;
+  align-items: center;
+
+  margin-bottom: 15px;
+  padding: 12px 16px;
+  border-radius: 15px;
+  max-width: calc(77vw * 0.8);
+  line-height: 1.5;
+  font-size: 1.1rem;
+  word-wrap: break-word;
+}
+
+
+
+
+.dots::after {
+  content: '';
+  display: inline-block;
+  width: 1.2em;
+  text-align: left;
+  animation: dotsJump 1.2s steps(4, end) infinite;
+}
+
+@keyframes dotsJump {
+  0%   { content: ''; }
+  25%  { content: '.'; }
+  50%  { content: '..'; }
+  75%  { content: '...'; }
+  100% { content: ''; }
 }

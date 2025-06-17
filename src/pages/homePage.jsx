@@ -27,54 +27,77 @@ function Home() {
   const navigate = useNavigate();
 
   const sequence = [
-    "ISM Buddy 🤖",
-    "Your Personal Assistant at IIT Dhanbad",
-    "Guiding You Through Campus Life",
-    "Ask Me About Academics & Clubs",
-    "Ready to Answer All Your ISM Questions",
-    "Your Go-To for Course and Hostel Info",
-    "Bringing You the Latest Campus Updates",
-    "Your Smart, Friendly Chat Companion",
-    "Always Ready. Always Helpful.",
-    "ISM Buddy 🤖",
-    "Personal Assistant at IIT Dhanbad",
-    "Guiding You Through Campus Life",
-    "Ask Me About Academics & Clubs",
-    "Your Go-To for Course and Hostel Info",
-    "Friendly Chat Companion",
-    "Always Ready. Always Helpful.",
-    "Making ISM Life Easier for You 💙",
-    "ISM Buddy 🤖",
-    "Personal Assistant at IIT Dhanbad",
-    "Guiding You Through Campus Life",
-    "Ask Me About Academics & Clubs",
-    "Ready to Answer All Your ISM Questions",
-    "Your Go-To for Course and Hostel Info",
-    "Bringing You the Latest Campus Updates",
-    "Your Smart, Friendly Chat Companion",
-    "Always Ready. Always Helpful.",
-    "Making ISM Life Easier for You 💙",
-    "ISM Buddy 🤖",
-    "Personal Assistant at IIT Dhanbad",
-    "Guiding You Through Campus Life",
-    "Ask Me About Academics & Clubs",
-    "Ready to Answer All Your ISM Questions",
-    "Your Go-To for Course and Hostel Info",
-    "Bringing You the Latest Campus Updates",
-    "Your Smart, Friendly Chat Companion",
-    "Always Ready. Always Helpful.",
-    "Making ISM Life Easier for You 💙",
-    "ISM Buddy 🤖",
-    "Your Personal Assistant at IIT Dhanbad",
-    "Guiding You Through Campus Life",
-    "Ask Me About Academics & Clubs",
-    "Ready to Answer All Your ISM Questions",
-    "Your Go-To for Course and Hostel Info",
-    "Bringing You the Latest Campus Updates",
-    "Your Smart, Friendly Chat Companion",
-    "Always Ready. Always Helpful.",
-    "Making ISM Life Easier for You 💙",
-  ];
+  "ISM Buddy 🤖",
+  "Guiding You Through Campus Life 🏫",
+  "Ask Me About Academics & Clubs 🎭",
+  "Always Ready. Always Helpful. ⚡",
+  "Making ISM Life Easier for You 💙",
+  "ISM Buddy 🤖",
+  "Guiding You Through Campus Life 🏫",
+  "Ask Me About Academics & Clubs 🎭",
+  "Always Ready. Always Helpful. ⚡",
+  "Making ISM Life Easier for You 💙",
+  "ISM Buddy 🤖",
+  "Guiding You Through Campus Life 🏫",
+  "Ask Me About Academics & Clubs 🎭",
+  "Always Ready. Always Helpful. ⚡",
+  "Making ISM Life Easier for You 💙",
+  "ISM Buddy 🤖",
+  "Guiding You Through Campus Life 🏫",
+  "Ask Me About Academics & Clubs 🎭",
+  "Always Ready. Always Helpful. ⚡",
+  "Making ISM Life Easier for You 💙",
+  "ISM Buddy 🤖",
+  "Guiding You Through Campus Life 🏫",
+  "Ask Me About Academics & Clubs 🎭",
+  "Always Ready. Always Helpful. ⚡",
+  "Making ISM Life Easier for You 💙",
+  "ISM Buddy 🤖",
+  "Guiding You Through Campus Life 🏫",
+  "Ask Me About Academics & Clubs 🎭",
+  "Always Ready. Always Helpful. ⚡",
+  "Making ISM Life Easier for You 💙",
+  "ISM Buddy 🤖",
+  "Guiding You Through Campus Life 🏫",
+  "Ask Me About Academics & Clubs 🎭",
+  "Always Ready. Always Helpful. ⚡",
+  "Making ISM Life Easier for You 💙",
+  "ISM Buddy 🤖",
+  "Guiding You Through Campus Life 🏫",
+  "Ask Me About Academics & Clubs 🎭",
+  "Always Ready. Always Helpful. ⚡",
+  "Making ISM Life Easier for You 💙",
+  "ISM Buddy 🤖",
+  "Guiding You Through Campus Life 🏫",
+  "Ask Me About Academics & Clubs 🎭",
+  "Always Ready. Always Helpful. ⚡",
+  "Making ISM Life Easier for You 💙",
+  "ISM Buddy 🤖",
+  "Guiding You Through Campus Life 🏫",
+  "Ask Me About Academics & Clubs 🎭",
+  "Always Ready. Always Helpful. ⚡",
+  "Making ISM Life Easier for You 💙",
+  "ISM Buddy 🤖",
+  "Guiding You Through Campus Life 🏫",
+  "Ask Me About Academics & Clubs 🎭",
+  "Always Ready. Always Helpful. ⚡",
+  "Making ISM Life Easier for You 💙",
+  "ISM Buddy 🤖",
+  "Guiding You Through Campus Life 🏫",
+  "Ask Me About Academics & Clubs 🎭",
+  "Always Ready. Always Helpful. ⚡",
+  "Making ISM Life Easier for You 💙",
+  "ISM Buddy 🤖",
+  "Guiding You Through Campus Life 🏫",
+  "Ask Me About Academics & Clubs 🎭",
+  "Always Ready. Always Helpful. ⚡",
+  "Making ISM Life Easier for You 💙",
+  "ISM Buddy 🤖",
+  "Guiding You Through Campus Life 🏫",
+  "Ask Me About Academics & Clubs 🎭",
+  "Always Ready. Always Helpful. ⚡",
+  "Making ISM Life Easier for You 💙",
+];
 
   const [userName, setUserName] = useState(null);
   const [theme, setTheme] = useState(
@@ -171,11 +194,17 @@ function Home() {
             </div>
           </div>
 
+          <p className={`home-left-3-1-${theme}`}>
+            Namaskar! 🙏🏻
+          </p>
           <p className={`home-left-3-${theme}`}>
-            Meet ISM Buddy – your friendly chat assistant from IIT Dhanbad!
-            Whether you're a student navigating college life, curious about
-            academics, or just looking for quick answers, ISM Buddy is here to
-            help 24/7.
+            Ask me anything from stellar placements (Google, Microsoft, JSW!) to cutting-edge research, 
+            vibrant campus life, or why our alumni network rules the world! I'll give you crisp, electrifying 
+            answers that'll make you go—"Yep, ISM is MY kind of place!" 😎
+        
+          </p>
+           <p className={`home-left-3-2-${theme}`}>
+              Fire away your questions! 
           </p>
 
           <div className={`home-left-4-${theme}`}>

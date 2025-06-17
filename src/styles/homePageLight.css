@@ -35,7 +35,7 @@
 }
 
 .home-left-2-light {
-  display: flex;
+  display: flex;height: 53px;
   gap: 15px;
   align-items: center;
   font-size: 30px;
@@ -51,8 +51,18 @@
   display: flex;
 }
 
+.home-left-3-1-light {
+  font-size: 14px;
+  font-weight: 800;max-width: 80%;
+}
+.home-left-3-2-light {
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: 800;max-width: 80%;
+}
+
 .home-left-3-light {
-  margin-top: 20px;
+  margin-top: 5px;
   font-size: 14px;
   font-weight: 800;max-width: 80%;
 }
@@ -290,6 +300,9 @@
   }
 
   .home-left-3-light {
+    font-size: 12px;
+  }
+  .home-left-3-1-light ,  .home-left-3-2-light {
     font-size: 12px;
   }
 
