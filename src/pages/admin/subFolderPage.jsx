@@ -4,6 +4,8 @@ import { fetchDocument } from "../../../appwrite/admin/fetchDocument.js";
 import "../../styles/admin/folderPage.css";
 
 const server = "https://bckd.onrender.com";
+
+// const server = "http://127.0.0.1:8000";
 const ITEMS_PER_PAGE = 7;
 
 const FolderPage = () => {

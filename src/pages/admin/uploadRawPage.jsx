@@ -14,6 +14,7 @@ const PDFManager = () => {
 
   const [name, setName] = useState("");
   const [file, setFile] = useState(null);
+  const [drivelink, setDrivelink] = useState(""); // ✅ NEW state for Drive link
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
   const [deletingId, setDeletingId] = useState(null);
@@ -39,6 +40,7 @@ const PDFManager = () => {
         name: f.name || f.NAME,
         max_id: parseInt(f.max_id || f.MAX_SIZE),
         docId: f.docId || f.$id,
+        drive: f.drive || f.DRIVE_LINK, // optionally fetched
       }));
 
       setUploadedFiles(normalized);
@@ -80,6 +82,7 @@ const PDFManager = () => {
     formData.append("file", file);
     formData.append("filename", name.trim());
     formData.append("collection_id", collection_id);
+    formData.append("drivelink", drivelink.trim()); // ✅ Add Drive link to upload
 
     setLoading(true);
     setStatus("⏳ Uploading...");
@@ -91,6 +94,7 @@ const PDFManager = () => {
 
       setStatus("✅ Upload successful and metadata saved.");
       setName("");
+      setDrivelink("");
       setFile(null);
       document.querySelector(".input-file").value = null;
 
@@ -133,12 +137,29 @@ const PDFManager = () => {
     <div className="pdf-container">
       <h2>📄 Raw Data Upload</h2>
 
+      {drivelink && (
+        <p>
+          🔗 Drive Link:{" "}
+          <a href={drivelink} target="_blank" rel="noopener noreferrer">
+            Open
+          </a>
+        </p>
+      )}
+
       <div className="upload-box">
         <input
           type="text"
           placeholder="Enter file name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          className="input-text"
+          disabled={loading}
+        />
+        <input
+          type="text"
+          placeholder="Enter drive link (optional)"
+          value={drivelink}
+          onChange={(e) => setDrivelink(e.target.value)}
           className="input-text"
           disabled={loading}
         />
@@ -171,6 +192,11 @@ const PDFManager = () => {
               <div className="file-info">
                 <strong>{file.name}</strong>
                 <p>Entries: {file.max_id}</p>
+                {file.drive && (
+                  <a href={file.drive} target="_blank" rel="noopener noreferrer">
+                    📁 View Drive
+                  </a>
+                )}
               </div>
               <button
                 className="btn-delete"

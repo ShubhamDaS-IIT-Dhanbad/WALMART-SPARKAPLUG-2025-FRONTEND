@@ -12,6 +12,7 @@ const PDFManager = () => {
   const { folder_id: collection_id } = useParams();
 
   const [name, setName] = useState("");
+  const [drivelink, setDrivelink] = useState(""); // ✅ added drivelink state
   const [file, setFile] = useState(null);
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
@@ -35,10 +36,11 @@ const PDFManager = () => {
         name: f.name || f.NAME,
         max_id: parseInt(f.max_id || f.MAX_SIZE),
         docId: f.docId || f.$id,
+        drivelink: f.drivelink || f.DRIVE_LINK || "", // ✅ include drivelink
       }));
 
       setUploadedFiles(normalized);
-      setHasMore(files.length === ITEMS_PER_PAGE); // enable/disable Next
+      setHasMore(files.length === ITEMS_PER_PAGE);
     } catch (error) {
       console.error("Fetch files error:", error);
       setStatus("❌ Failed to fetch files.");
@@ -76,6 +78,7 @@ const PDFManager = () => {
     formData.append("file", file);
     formData.append("filename", name);
     formData.append("collection_id", collection_id);
+    formData.append("drivelink", drivelink); // ✅ include drivelink in upload
 
     setLoading(true);
     setStatus("⏳ Uploading...");
@@ -89,12 +92,14 @@ const PDFManager = () => {
         name: response.data.file_name,
         max_id: response.data.max_id,
         docId: response.data.doc_id,
+        drivelink: drivelink, // ✅ save to state
       };
 
       setUploadedFiles((prev) => [newFile, ...prev]);
       setStatus("✅ Upload successful and metadata saved.");
       setName("");
       setFile(null);
+      setDrivelink(""); // ✅ reset drivelink
       document.querySelector(".input-file").value = "";
     } catch (error) {
       console.error("Upload or metadata error:", error);
@@ -143,6 +148,14 @@ const PDFManager = () => {
           disabled={loading}
         />
         <input
+          type="text"
+          placeholder="Enter drive link (optional)"
+          value={drivelink}
+          onChange={(e) => setDrivelink(e.target.value)}
+          className="input-text"
+          disabled={loading}
+        />
+        <input
           type="file"
           accept=".json"
           onChange={handleFileChange}
@@ -171,6 +184,19 @@ const PDFManager = () => {
               <div className="file-info">
                 <strong>{file.name}</strong>
                 <p>Entries: {file.max_id}</p>
+                {file.drivelink && (
+                  <p>
+                    🔗{" "}
+                    <a
+                      href={file.drivelink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "blue" }}
+                    >
+                      Drive Link
+                    </a>
+                  </p>
+                )}
               </div>
               <button
                 className="btn-delete"

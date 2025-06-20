@@ -5,7 +5,6 @@ import { fetchAllFiles } from "../../../appwrite/admin/fetch_from_appwrite.js";
 import "../../styles/adminPage.css";
 
 const server = "https://bckd.onrender.com";
-
 // const server = "http://127.0.0.1:8000";
 
 const ITEMS_PER_PAGE = 10;
@@ -15,13 +14,13 @@ const PDFManager = () => {
 
   const [file, setFile] = useState(null);
   const [name, setName] = useState("");
+  const [drivelink, setDrivelink] = useState("");
   const [fileType, setFileType] = useState("pdf");
   const [status, setStatus] = useState("");
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingFiles, setLoadingFiles] = useState(true);
   const [deletingId, setDeletingId] = useState(null);
-
   const [currentPage, setCurrentPage] = useState(1);
 
   const handleFileChange = (e) => {
@@ -39,6 +38,7 @@ const PDFManager = () => {
     formData.append("file", file);
     formData.append("filename", name);
     formData.append("collection_id", collection_id);
+    formData.append("drivelink", drivelink);
 
     setLoading(true);
     setStatus("⏳ Uploading...");
@@ -57,12 +57,14 @@ const PDFManager = () => {
         name: name,
         max_id: response.data?.max_id || 0,
         docId: response.data?.docId || null,
+        drivelink: drivelink,
       };
 
       setUploadedFiles((prev) => [uploaded, ...prev]);
       setStatus("✅ Upload successful and metadata saved.");
       setName("");
       setFile(null);
+      setDrivelink("");
     } catch (error) {
       console.error(error);
       setStatus("❌ Upload or saving metadata failed.");
@@ -105,6 +107,7 @@ const PDFManager = () => {
         name: f.name || f.NAME || "Unnamed",
         max_id: f.max_id || f.MAX_SIZE || 0,
         docId: f.$id || f.docId || null,
+        drivelink: f.drivelink || f.DRIVE_LINK || "", // ✅ include drive link
       }));
       setUploadedFiles(normalized);
       setCurrentPage(page);
@@ -129,6 +132,14 @@ const PDFManager = () => {
           placeholder="Enter name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          className="input-text"
+        />
+
+        <input
+          type="text"
+          placeholder="Drive link (optional)"
+          value={drivelink}
+          onChange={(e) => setDrivelink(e.target.value)}
           className="input-text"
         />
 
@@ -170,6 +181,19 @@ const PDFManager = () => {
               <div className="file-info">
                 <strong>{file.name}</strong>
                 <p>max_id: {file.max_id}</p>
+                {file.drivelink && (
+                  <p>
+                    🔗{" "}
+                    <a
+                      href={file.drivelink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "blue" }}
+                    >
+                      Drive Link
+                    </a>
+                  </p>
+                )}
               </div>
               <button
                 className="btn-delete"
@@ -185,7 +209,6 @@ const PDFManager = () => {
         )}
       </div>
 
-      {/* ✅ Pagination Controls */}
       <div className="pagination-controls">
         <button
           onClick={() => loadFiles(currentPage - 1)}
