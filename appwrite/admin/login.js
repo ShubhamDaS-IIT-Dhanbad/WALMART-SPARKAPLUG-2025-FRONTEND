@@ -3,7 +3,7 @@ import { databases } from "../appwrite_config.js";
 import conf from "../../src/config/conf.js";
 
 const DATABASE_ID = conf.appwriteDatabaseId;
-const COLLECTION_ID = conf.appwriteAdminLoginCollectionId;
+const COLLECTION_ID ="68615675002e2a3e0ede";
 
 export async function login(username, password) {
   try {

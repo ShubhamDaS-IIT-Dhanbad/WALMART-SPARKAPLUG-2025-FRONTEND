@@ -1,10 +1,9 @@
-import { Client, Account, Permission, Role, Databases, ID, Query } from "appwrite";
+import { Query } from "appwrite";
 
-import {account, databases } from "../appwrite_config.js";
+import {databases } from "../appwrite_config.js";
 import conf from '../../src/config/conf.js'
 
 const DATABASE_ID = conf.appwriteDatabaseId;
-export { DATABASE_ID };
 
 // fetchDocument.js
 export const fetchDocument = async (collectionId, offset = 0, limit = 10) => {

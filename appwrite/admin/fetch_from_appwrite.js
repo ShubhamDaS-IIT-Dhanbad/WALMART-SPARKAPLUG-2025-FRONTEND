@@ -31,7 +31,7 @@ export const fetchAllFiles = async (collection_id, offset = 0, limit = 10) => {
 // Fetch all folders with pagination
 export const fetchAllFolder = async (offset = 0, limit = 10) => {
   try {
-    const response = await databases.listDocuments(DATABASE_ID,"684aabc7001935c2de11", [
+    const response = await databases.listDocuments(DATABASE_ID,"68614c80000a8f7d8ba2", [
       Query.equal("is_folder", true),
       Query.offset(offset),
       Query.limit(limit)
