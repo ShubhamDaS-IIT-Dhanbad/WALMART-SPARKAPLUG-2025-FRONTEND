@@ -140,8 +140,8 @@ function Home() {
   const handleLoginClick = () => {
     account.createOAuth2Session(
       "google",
-      "https://chat-bot-iit-ism-frontend-dbwo.vercel.app",
-      "https://chat-bot-iit-ism-frontend-dbwo.vercel.app"
+      "https://ism-buddy-frontend.onrender.com",
+      "https://ism-buddy-frontend.onrender.com/chat"
     );
   };
 
