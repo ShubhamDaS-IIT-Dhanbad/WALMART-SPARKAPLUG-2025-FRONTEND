@@ -13,6 +13,7 @@ const AdminLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = await login(adminId, password);
+    console.log(user);
     if (user) {
       Cookies.set('adminid', user.$id, { expires: 1 });
       navigate('/admin/main');
