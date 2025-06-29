@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { fetchAllFiles } from "../../../appwrite/admin/fetch_from_appwrite.js";
 import "../../styles/adminPage.css";
+import conf from '../../config/conf.js'
 
-const server = "https://bckd.onrender.com";
-// const server = "http://localhost:8000";
+const server = conf.serverUrl;
+
 const ITEMS_PER_PAGE = 5;
 
 const PDFManager = () => {

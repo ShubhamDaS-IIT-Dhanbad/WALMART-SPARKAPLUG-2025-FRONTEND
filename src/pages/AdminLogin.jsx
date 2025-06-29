@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { login } from '../../appwrite/admin/login.js'; // adjust path
 import '../styles/adminLogin.css';
 
 const AdminLogin = () => {
@@ -9,15 +10,14 @@ const AdminLogin = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Dummy validation (replace with real backend call)
-    if (adminId === 'admin' && password === 'password123') {
-      Cookies.set('adminid', adminId, { expires: 1 });
+    const user = await login(adminId, password);
+    if (user) {
+      Cookies.set('adminid', user.$id, { expires: 1 });
       navigate('/admin/main');
     } else {
-      setError('Invalid admin ID or password.');
+      setError('Invalid credentials.');
     }
   };
 
@@ -27,7 +27,7 @@ const AdminLogin = () => {
         <h2 className="admin-login-title">Admin Login</h2>
         {error && <p className="admin-error">{error}</p>}
         <form onSubmit={handleSubmit}>
-          <label htmlFor="adminId">Admin ID</label>
+          <label htmlFor="adminId">Username</label>
           <input
             type="text"
             id="adminId"

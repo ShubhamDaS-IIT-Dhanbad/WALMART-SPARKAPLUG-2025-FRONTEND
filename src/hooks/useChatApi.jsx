@@ -1,9 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
+import conf from '../config/conf.js'
 
-// const server = "http://127.0.0.1:8000/chat";
-const server='https://bckd.onrender.com/chat'
-
+const server = conf.serverUrl;
 const useChatApi = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -12,7 +11,7 @@ const useChatApi = () => {
     setError(null);
 
     try {
-      const response = await axios.post(server, { question: query });
+      const response = await axios.post(`${server}/chat`, { question: query });
       return response.data; // ✅ stringify here
     } catch (err) {
       let customError = err.message;

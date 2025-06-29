@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { fetchDocument } from "../../../appwrite/admin/fetchDocument.js";
 import "../../styles/admin/folderPage.css";
+import conf from '../../config/conf.js'
 
-const server = "https://bckd.onrender.com";
-
-// const server = "http://127.0.0.1:8000";
+const server = conf.serverUrl;
 const ITEMS_PER_PAGE = 7;
 
 const FolderPage = () => {

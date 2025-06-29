@@ -8,7 +8,9 @@ import {
 import "../styles/adminPage.css";
 
 const LIMIT = 10;
-const server="https://bckd.onrender.com"
+import conf from '../config/conf.js'
+
+const server = conf.serverUrl;
 
 const modelCosts = {
   "gpt-4o-mini": "Cheapest",

@@ -1,10 +1,12 @@
 // appwriteConfig.js
 import { Client, Account, Databases, Storage } from "appwrite";
 
-// Initialize Appwrite client
+import conf from '../src/config/conf.js'
+
+const APPWRITE_PROJECT_ID =conf.appwriteProjectId;
 const client = new Client()
-  .setEndpoint("https://fra.cloud.appwrite.io/v1") // Your Appwrite API endpoint
-  .setProject("6825c9130002bf2b1514");              // Your Project ID
+  .setEndpoint("https://fra.cloud.appwrite.io/v1") 
+  .setProject(APPWRITE_PROJECT_ID);              
 
 // Services
 const account = new Account(client);

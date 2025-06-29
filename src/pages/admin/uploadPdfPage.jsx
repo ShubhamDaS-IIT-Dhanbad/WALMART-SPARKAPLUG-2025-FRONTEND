@@ -4,8 +4,9 @@ import axios from "axios";
 import { fetchAllFiles } from "../../../appwrite/admin/fetch_from_appwrite.js";
 import "../../styles/adminPage.css";
 
-const server = "https://bckd.onrender.com";
-// const server = "http://127.0.0.1:8000";
+import conf from '../../config/conf.js'
+
+const server = conf.serverUrl;
 
 const ITEMS_PER_PAGE = 10;
 

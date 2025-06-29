@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   fetchAllFolder
-} from "../../../appwrite/admin/main_folder.js";
+} from "../../../appwrite/admin/fetch_from_appwrite.js";
 
 const MainPage = () => {
   const [folders, setFolders] = useState([]);
