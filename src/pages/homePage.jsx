@@ -138,12 +138,14 @@ function Home() {
   }, []);
 
   const handleLoginClick = () => {
-    account.createOAuth2Session(
-      "google",
-      "https://ism-buddy-frontend.onrender.com",
-      "https://ism-buddy-frontend.onrender.com/chat"
-    );
-  };
+  const rootUrl = window.location.origin;
+  account.createOAuth2Session(
+    "google",
+    rootUrl,
+    `${rootUrl}/chat`
+  );
+};
+
 
   const handleLogoutClick = () => {
     account
