@@ -3,6 +3,7 @@ const conf = {
     serverUrl: import.meta.env.VITE_SERVER_URL,
     appwriteDatabaseId: import.meta.env.VITE_APPWRITE_DATABASE_ID,
     appwriteProjectId: import.meta.env.VITE_APPWRITE_PROJECT_ID,
+    anoId: import.meta.env.VITE_ANO_ID,
     appwriteAdminLoginCollectionId: import.meta.env.VITE_APPWRITE_ADMIN_LOGIN_COLLECTION_ID
 };
 

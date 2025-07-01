@@ -1,12 +1,18 @@
 // secure/privateRoute.js
-import React from "react";
 import { Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
+import { Navigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import conf from '../../config/conf.js'
+
+const anoid = conf.anoId;
+
 const PrivateRoute = ({ children }) => {
   const userId = Cookies.get("userId");
+  const anoId = Cookies.get("anoId");
 
-  if (!userId) {
+  if (!userId && anoId !== anoid) {
     return <Navigate to="/" replace />;
   }
 

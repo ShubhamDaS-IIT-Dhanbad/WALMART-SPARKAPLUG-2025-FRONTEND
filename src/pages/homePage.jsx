@@ -6,9 +6,6 @@ import Cookies from "js-cookie";
 
 import NavBar from "../components/Navbar.jsx";
 
-import logoLight from "../assets/iit-ism-light.png";
-import logoDark from "../assets/cyan.png";
-
 import iitlogoLight from "../assets/iit-logo-light.png";
 
 import TypeAnimation from "../utils/typeAnimation.jsx";
@@ -25,6 +22,33 @@ import {
 
 function Home() {
   const navigate = useNavigate();
+   const [tapCount, setTapCount] = useState(0);
+  const timerRef = useRef(null);
+
+
+  const handleTap = () => {
+    if (tapCount === 0) {
+      // Start the 7 second timer
+      timerRef.current = setTimeout(() => {
+        setTapCount(0); // Reset after 7 seconds
+      }, 7000);
+    }
+
+    const newCount = tapCount + 1;
+    setTapCount(newCount);
+
+    if (newCount === 10) {
+      clearTimeout(timerRef.current); // Stop timer
+      const email = prompt("Enter your email:");
+      if (email) {
+        Cookies.set("anoId", email, { expires: 7 }); // store for 7 days
+        alert(`Email stored: ${email}`);
+      }
+      setTapCount(0); // Reset count after prompt
+    }
+  };
+
+
 
   const sequence = [
   "ISM Buddy 🤖",
@@ -111,6 +135,10 @@ function Home() {
     setThemes(theme);
   }, [theme]);
 
+
+
+
+  
   useEffect(() => {
     account
       .get()
@@ -136,6 +164,10 @@ function Home() {
         console.log("User not logged in");
       });
   }, []);
+
+
+
+
 
   const handleLoginClick = () => {
   const rootUrl = window.location.origin;
@@ -274,7 +306,7 @@ function Home() {
           </div>
         </div>
 
-        <div className={`home-right-${theme}`}>
+        <div className={`home-right-${theme}`} onClick={handleTap}>
           <img src={theme=='light' ? iitlogoLight :iitlogoLight} alt="Logo" />
         </div>
       </div>
