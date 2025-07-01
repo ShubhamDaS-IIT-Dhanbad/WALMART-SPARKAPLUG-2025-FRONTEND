@@ -1,5 +1,5 @@
 // Home.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { account } from "../../appwrite/appwrite_config.js";
 import Cookies from "js-cookie";
