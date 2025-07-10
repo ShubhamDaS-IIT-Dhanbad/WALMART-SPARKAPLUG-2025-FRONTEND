@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import Cookies from "js-cookie";
 import useChatApi from "../../hooks/useChatApi.jsx";
 import Sidebar from "./chatPageSidebar.jsx";
+
+import { useParams } from "react-router-dom"; // make sure you have this
+
 import Header from "./chatPageHeader.jsx";
 import ChatMessages from "./chatMessage.jsx";
 import ChatInput from "./chatInput.jsx";
@@ -19,6 +22,9 @@ import "../../styles/chatPageDark/chatMessageDark.css";
 import "../../styles/chatPageDark/chatInputDark.css";
 
 const ChatPage = () => {
+// Inside your component:
+const { productId } = useParams(); // extract product ID from URL
+console.log(productId)
   const [inputMessage, setInputMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [followUpQuestions, setFollowUpQuestions] = useState([]);
@@ -145,8 +151,11 @@ const ChatPage = () => {
 
     // Refocus the input after a short delay
     setTimeout(() => inputRef.current?.focus(), 50);
-
-    const botResponse = await sendMessage(userMessage);
+    console.log("herere",productId)
+    const botResponse = await sendMessage({
+      query: userMessage,
+      product_id: productId,
+    });
     console.log(botResponse)
     if (!botResponse) {
       const errorMessages = [...newMessages, { type: "bot", text: `Error: ${error}` }];
@@ -156,14 +165,12 @@ const ChatPage = () => {
     }
 
     // Destructure answer and followUpQuestions from your response
-    const { answer, follow_up_question} = botResponse;
+    const {response} = botResponse;
 
     // Add bot answer message with followUpQuestions included
-    const finalMessages = [...newMessages, { type: "bot", text: answer, follow_up_question }];
+    const finalMessages = [...newMessages, { type: "bot", text: response }];
 
     setMessages(finalMessages);
-    setFollowUpQuestions(follow_up_question|| []);
-    saveChatSessionToCookie(finalMessages, follow_up_question || []);
   };
 
   const handleSendSuggestion = async (suggestion) => {
@@ -228,23 +235,7 @@ const ChatPage = () => {
 
   return (
     <div className={`chat-container-main-${theme}`}>
-      {/* Sidebar can be re-enabled if needed:
-      <Sidebar
-        theme={theme}
-        isSidebarOpen={isSidebarOpen}
-        toggleSidebar={toggleSidebar}
-        chatHistory={chatHistory}
-        loadChat={(id) => {
-          loadChat(id);
-          setCurrentChatId(id);
-        }}
-        deleteChatSession={deleteChatSession}
-        toggleTheme={toggleTheme}
-        currentChatId={currentChatId}
-        setCurrentChatId={setCurrentChatId}
-      /> 
-      */}
-
+      
       <main className={`chat-container-${theme}`}>
         <div className={`chat-main-div-${theme}`}>
           <Header
@@ -272,8 +263,6 @@ const ChatPage = () => {
             setMessages={setMessages}
             currentChatId={currentChatId}
             setCurrentChatId={setCurrentChatId}
-            followUpQuestions={followUpQuestions} // pass it if you want to render suggestions inside ChatMessages
-            setFollowUpQuestions={setFollowUpQuestions}
           />
 
           <ChatInput

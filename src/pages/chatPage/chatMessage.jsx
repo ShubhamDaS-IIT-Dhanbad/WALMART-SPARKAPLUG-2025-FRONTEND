@@ -3,10 +3,9 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { ClipLoader } from "react-spinners";
 import Cookies from "js-cookie";
 
-import logo from "../../assets/iit-logo-light.png";
+import logo from "../../assets/bot-icon.png"; // Replace with your product logo if available
 import bot_icon from "../../assets/bot-icon.png";
 import user_icon from "../../assets/user-icon.png";
 import useChatApi from "../../hooks/useChatApi.jsx";
@@ -22,26 +21,22 @@ const ChatMessages = ({
   handleSendSuggestion,
 }) => {
   const inputRef = useRef(null);
-  const { sendMessage, isLoading, error } = useChatApi();
+  const { isLoading, error } = useChatApi();
   const [chatId, setChatId] = useState(() => {
-    let id = Cookies.get("currentChatId");
+    let id = Cookies.get("currentProductChatId");
     if (!id) {
       const now = new Date();
-      id = `chat-${now.toISOString().replace(/[:.]/g, "-")}`;
-      Cookies.set("currentChatId", id);
+      id = `product-chat-${now.toISOString().replace(/[:.]/g, "-")}`;
+      Cookies.set("currentProductChatId", id);
     }
     return id;
   });
 
   useEffect(() => {
-    const allChats = JSON.parse(Cookies.get("chatHistory") || "{}");
+    const allChats = JSON.parse(Cookies.get("productChatHistory") || "{}");
     const currentMessages = allChats[chatId]?.messages || [];
     setMessages(currentMessages);
   }, [chatId, setMessages]);
-
-  const handleSuggestionClick = (question) => {
-    handleSendSuggestion(question);
-  };
 
   const [loadingStage, setLoadingStage] = useState("loading");
 
@@ -61,26 +56,11 @@ const ChatMessages = ({
   const renderLoadingText = () => {
     switch (loadingStage) {
       case "loading":
-        return (
-          <>
-            Loading
-            <span className="dots" />
-          </>
-        );
+        return <>Loading<span className="dots" /></>;
       case "parsing":
-        return (
-          <>
-            Parsing
-            <span className="dots" />
-          </>
-        );
+        return <>Parsing<span className="dots" /></>;
       case "thinking":
-        return (
-          <>
-            Thinking
-            <span className="dots" />
-          </>
-        );
+        return <>Thinking<span className="dots" /></>;
       default:
         return null;
     }
@@ -90,28 +70,11 @@ const ChatMessages = ({
     <section className={`chat-screen-${theme}`}>
       {messages?.length <= 0 ? (
         <div className={`chat-screen-init-${theme}`}>
-          <img src={logo} alt="Glowing Orb" className="orb" />
-          <h1 className={`title-${theme}`}>Welcome to IIT (ISM) ChatBot</h1>
+          <img src={logo} alt="Product Chat Icon" className="orb" />
+          <h1 className={`title-${theme}`}>Welcome to Product Assistant</h1>
           <p className={`chat-description-${theme}`}>
-            Hi, I am the IIT ISM ChatBot. Ask me anything about academics,
-            campus life, facilities, and more.
+            Hi! I'm your Product Assistant. Ask me anything about this product — features, pricing, warranty, specifications, and more.
           </p>
-          <div className={`suggestions-${theme}`}>
-            {[
-              "What are the top branches at IIT (ISM) Dhanbad?",
-              "How is campus life at IIT (ISM) Dhanbad?",
-              "What are the placement statistics for IIT (ISM) Dhanbad?",
-            ].map((question, index) => (
-              <div
-                key={index}
-                className={`card-item-${theme}`}
-                onClick={() => handleSuggestionClick(question)}
-                style={{ cursor: "pointer" }}
-              >
-                <p>{question}</p>
-              </div>
-            ))}
-          </div>
         </div>
       ) : (
         <div className={`chat-messages-${theme}`}>
@@ -120,7 +83,7 @@ const ChatMessages = ({
               {msg.type !== "user" && (
                 <div className={`bot-icon-div-${theme}`}>
                   <img src={bot_icon} alt="Bot icon" />
-                  <p>ISM BUDDY</p>
+                  <p>ProductBot</p>
                 </div>
               )}
 
@@ -138,45 +101,37 @@ const ChatMessages = ({
                       : `bot-message-${theme}`
                   }`}
                 >
-                  {(() => {
-                    try {
-                      const parsed = JSON.parse(msg.text);
-                      return (
-                        <ReactMarkdown
-                          remarkPlugins={[remarkGfm]}
-                          components={{
-                            code({ inline, className, children, ...props }) {
-                              const match = /language-(\w+)/.exec(
-                                className || ""
-                              );
-                              return !inline && match ? (
-                                <SyntaxHighlighter
-                                  style={materialDark}
-                                  language={match[1]}
-                                  PreTag="div"
-                                  {...props}
-                                >
-                                  {String(children).replace(/\n$/, "")}
-                                </SyntaxHighlighter>
-                              ) : (
-                                <code className={className} {...props}>
-                                  {children}
-                                </code>
-                              );
-                            },
-                          }}
-                        >
-                          {parsed.answer}
-                        </ReactMarkdown>
-                      );
-                    } catch (e) {
-                      return (
-                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                          {msg.text}
-                        </ReactMarkdown>
-                      );
-                    }
-                  })()}
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      code({ inline, className, children, ...props }) {
+                        const match = /language-(\w+)/.exec(className || "");
+                        return !inline && match ? (
+                          <SyntaxHighlighter
+                            style={materialDark}
+                            language={match[1]}
+                            PreTag="div"
+                            {...props}
+                          >
+                            {String(children).replace(/\n$/, "")}
+                          </SyntaxHighlighter>
+                        ) : (
+                          <code className={className} {...props}>
+                            {children}
+                          </code>
+                        );
+                      },
+                    }}
+                  >
+                    {(() => {
+                      try {
+                        const parsed = JSON.parse(msg.text);
+                        return parsed.answer || msg.text;
+                      } catch {
+                        return msg.text;
+                      }
+                    })()}
+                  </ReactMarkdown>
                 </div>
 
                 {msg.type === "user" && (
@@ -188,36 +143,12 @@ const ChatMessages = ({
             </div>
           ))}
 
-          {/* Follow-up Suggestions */}
-          {(() => {
-            const lastMsg = messages[messages.length - 1];
-            const followUps = lastMsg?.follow_up_question || [];
-            if (followUps.length === 0) return null;
-
-            return (
-              <div className={`suggestions-${theme}`}>
-                {followUps.map((question, index) => (
-                  <div
-                    key={index}
-                    className={`card-item-${theme}`}
-                    onClick={() => handleSuggestionClick(question)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <p>{question}</p>
-                  </div>
-                ))}
-              </div>
-            );
-          })()}
-
-          {/* Loading Status */}
           {(isloading || isLoading) && (
-            <div style={{ padding: "20px",marginTop:"30px" }}>
+            <div style={{ padding: "20px", marginTop: "30px" }}>
               <div className={`bot-icon-div-${theme}`}>
                 <div className="bot-icon-loading">
                   <img src={bot_icon} alt="Bot icon" />
                 </div>
-
                 <div className={`chat-loader-${theme} chat-loader`}>
                   <div className="typing-animation">{renderLoadingText()}</div>
                 </div>

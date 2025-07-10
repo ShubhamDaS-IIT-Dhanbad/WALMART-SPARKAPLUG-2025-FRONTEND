@@ -1,19 +1,24 @@
 import { useState } from "react";
 import axios from "axios";
-import conf from '../config/conf.js'
 
-const server = conf.serverUrl;
+const server = "http://127.0.0.1:8000/productqa";
 
 const useChatApi = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const sendMessage = async (query) => {
+
+  const sendMessage = async ({query,product_id}) => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const response = await axios.post(`${server}/chat`, { question: query });
-      return response.data; // ✅ stringify here
+      console.log(product_id,query)
+      const response = await axios.post(server, {
+        product_id,
+        query,
+      });
+      console.log(response)
+      return response.data;
     } catch (err) {
       let customError = err.message;
 
