@@ -1,9 +1,1 @@
-{
-  "name": "WALMART PRODUCT ANALYZER",
-  "short_name": "App",
-  "start_url": ".",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "description": "Description of your app"
- 
-}
+{"name":"","short_name":"","theme_color":"#ffffff","background_color":"#ffffff","display":"standalone"}
