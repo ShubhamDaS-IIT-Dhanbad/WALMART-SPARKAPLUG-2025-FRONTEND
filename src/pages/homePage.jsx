@@ -103,7 +103,7 @@ function Home() {
       });
   };
 
-  const handleChatClick = () => navigate("/chat");
+  const handleChatClick = () => navigate("/link");
 
   const handleFacebookClick = () => window.open("https://www.facebook.com/walmart", "_blank");
   const handleLinkedInClick = () => window.open("https://www.linkedin.com/company/walmart/", "_blank");
@@ -140,26 +140,13 @@ function Home() {
             <FaTwitterSquare className={`footer-icons-div-${theme}`} onClick={handleTwitterClick} />
           </div>
 
-          {userName && (
-            <div className={`home-left-5-n-${theme}`}>
-              <div className={`home-left-5-2-n-${theme}`}>Welcome, {userName}</div>
-            </div>
-          )}
 
           <div className={`home-left-5-${theme}`}>
             <div className={`home-left-5-1-${theme}`} onClick={handleChatClick}>
-              ANALYZE REVIEWS
+              ANALYZE PRODUCT
             </div>
 
-            {userName ? (
-              <div className={`home-left-5-1-${theme}`} onClick={handleLogoutClick}>
-                LOG OUT
-              </div>
-            ) : (
-              <div className={`home-left-5-2-${theme}`} onClick={handleLoginClick}>
-                LOGIN
-              </div>
-            )}
+            
           </div>
 
           <div className={`home-left-br-${theme}`}>

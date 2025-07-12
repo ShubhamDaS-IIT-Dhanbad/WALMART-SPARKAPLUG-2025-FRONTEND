@@ -45,68 +45,15 @@ const NavBar = ({theme}) => {
       <div className={`navbar navbar-${theme}`}>
         <div className={`navbar-left navbar-left-${theme}`}>
           <div className={`navbar-left-name navbar-left-name-${theme}`} style={{ display: "flex", gap: "7px" }}>
-            IIT (ISM) <p>DHANBAD.</p>
+            WALMART <p>PODUCT ANALYZER</p>
           </div>
         </div>
 
-        {isMobile ? (
-          <button className={`hamburger-menu hamburger-menu-${theme}`} onClick={toggleMenu}>
-            {isMenuOpen ? (
-              <IoClose className={`hamburger-menu-close hamburger-menu-close-${theme}`} />
-            ) : (
-              <GiHamburgerMenu className={`hamburger-menu-ham hamburger-menu-ham-${theme}`} />
-            )}
-          </button>
-        ) : (
-          <div className={`navbar-right navbar-right-${theme}`}>
-            <div
-              className={`navbar-right-link-properties navbar-right-link-properties-${theme} ${
-                location.pathname === "/" ? "active" : ""
-              }`}
-            >
-              CHAT BOT
-            </div>
-            <div
-              className={`navbar-right-link-properties navbar-right-link-properties-${theme}`}
-              onClick={() => (window.location.href = "https://www.iitism.ac.in/")}
-            >
-              MAIN PAGE
-            </div>
-            <div
-              className={`navbar-right-link-properties navbar-right-link-properties-${theme}`}
-              onClick={() => (window.location.href = "https://www.iitism.ac.in/contact-ma")}
-            >
-              CONTACT US
-            </div>
-          </div>
-        )}
+        
 
       </div>
 
-      {isMenuOpen && (
-        <div className={`mobile-side-menu mobile-side-menu-${theme} open`}>
-          <div
-            className={`mobile-menu-link mobile-menu-link-${theme} ${
-              location.pathname === "/" ? "active" : ""
-            }`}
-            onClick={handleLinkClick}
-          >
-            CHAT BOT
-          </div>
-          <div
-            className={`mobile-menu-link mobile-menu-link-${theme}`}
-            onClick={() => (window.location.href = "https://www.iitism.ac.in/")}
-          >
-            MAIN PAGE
-          </div>
-          <div
-            className={`mobile-menu-link mobile-menu-link-${theme}`}
-            onClick={() => (window.location.href = "https://www.iitism.ac.in/contact-ma")}
-          >
-            CONTACT US
-          </div>
-        </div>
-      )}
+      
     </>
   );
 };
