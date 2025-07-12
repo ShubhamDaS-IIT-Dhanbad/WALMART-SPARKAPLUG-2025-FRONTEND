@@ -16,7 +16,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import ReactMarkdown from "react-markdown";
-import WordBlob from "./wordBlob";
+// import WordBlob from "./wordBlob";
 import "../styles/productChart.css";
 
 const COLORS = ["#4CAF50", "#F44336"];
@@ -300,9 +300,9 @@ const ProductCharts = ({ productData, ratingDist, data }) => {
           {renderReviewCard(data.top_negative_review, false)}
         </div>
 
-        <div className="wb">
+        {/* <div className="wb">
           <WordBlob top_mentions={data.top_mentions} />
-        </div>
+        </div> */}
 
         <div className="urs"> 
           <div className="urs-1">USER REVIEW WITH SENTIMENT</div>
