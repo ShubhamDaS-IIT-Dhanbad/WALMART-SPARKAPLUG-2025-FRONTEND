@@ -4,6 +4,9 @@ import axios from "axios";
 import ProductCharts from "./singleProductChart.jsx";
 import "../styles/singleProductPage.css";
 
+
+const server = "https://walmart-sparkaplug-2025-backend-1.onrender.com";
+
 const SingleProductPage = () => {
   const { productId } = useParams();
   const location = useLocation();
@@ -19,7 +22,7 @@ const SingleProductPage = () => {
       try {
         setLoading(true);
         const res = await axios.post(
-          "https://walmart-sparkaplug-2025-backend-1.onrender.com/singleproduct/analytics",
+          `${server}/singleproduct/analytics `,
           {
             product_id: productId,
             product_url: productUrl,
