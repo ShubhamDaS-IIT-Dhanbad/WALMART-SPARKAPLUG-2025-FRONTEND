@@ -5,7 +5,7 @@ import { account } from "../../appwrite/appwrite_config.js";
 import Cookies from "js-cookie";
 
 import NavBar from "../components/Navbar.jsx";
-// import walmartLogo from "../assets/walmart-logo.png";
+import walmartLogo from "../assets/wl.png";
 import TypeAnimation from "../utils/typeAnimation.jsx";
 
 import "../styles/homePageLight.css";
@@ -162,7 +162,7 @@ function Home() {
         </div>
 
         <div className={`home-right-${theme}`} onClick={handleTap}>
-          <img alt="Walmart Logo" />
+          <img alt="Walmart Logo" src={walmartLogo}/>
         </div>
       </div>
     </>
