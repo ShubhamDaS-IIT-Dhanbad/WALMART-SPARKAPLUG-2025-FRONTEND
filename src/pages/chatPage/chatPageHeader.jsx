@@ -22,16 +22,7 @@ const Header = ({
 
   return (
     <header className={`chat-top-bar-${theme}`}>
-      
-      {/* ←‐ Home‐Button */}
-      <button
-        className={`chat-page-back-button-${theme}`}
-        onClick={() => navigate("/")}
-        aria-label="Go back"
-      >
-        <RiHome3Line size={30} />
-      </button>
-
+    
    
       {/* ─────────────────────────────────────────────────────
            RIGHT COLUMN: Version / CLEAR CHAT / NEW CHAT
@@ -60,8 +51,6 @@ const Header = ({
 
 
 
-        <span className={`chat-version-${theme}`}>ISM BUDDY V1</span>
-
         {hasMessages && (
           <button
             className={`delete-session-button-${theme}`}
@@ -76,13 +65,6 @@ const Header = ({
           </button>
         )}
 
-        <button
-          className={`create-task-${theme}`}
-          onClick={startNewChat}
-          aria-label="Start new chat"
-        >
-          NEW CHAT <GoPlus className={`goplus-new-${theme}`} />
-        </button>
       </div>
     </header>
   );

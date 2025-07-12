@@ -3,24 +3,24 @@ import { useNavigate } from "react-router-dom";
 import "../styles/linkInputForm.css";
 
 const LinkInputForm = ({ onSubmit, onChat }) => {
-  const [links, setLinks] = useState([""]);
+  const [productLinks, setProductLinks] = useState([""]);
   const navigate = useNavigate();
 
-  const handleChange = (index, value) => {
-    const updated = [...links];
-    updated[index] = value;
-    setLinks(updated);
+  const handleLinkChange = (index, value) => {
+    const updatedLinks = [...productLinks];
+    updatedLinks[index] = value;
+    setProductLinks(updatedLinks);
   };
 
-  const handleAddInput = () => {
-    if (links.length < 3) {
-      setLinks([...links, ""]);
+  const handleAddLink = () => {
+    if (productLinks.length < 3) {
+      setProductLinks([...productLinks, ""]);
     }
   };
 
-  const handleRemove = (index) => {
-    const updated = links.filter((_, i) => i !== index);
-    setLinks(updated);
+  const handleRemoveLink = (index) => {
+    const updatedLinks = productLinks.filter((_, i) => i !== index);
+    setProductLinks(updatedLinks);
   };
 
   const extractProductId = (url) => {
@@ -28,53 +28,68 @@ const LinkInputForm = ({ onSubmit, onChat }) => {
     return match ? match[1] : null;
   };
 
-  const nonEmptyLinks = links.filter((link) => link.trim() !== "");
+  const validLinks = productLinks.filter((link) => link.trim() !== "");
 
-  const handleCompare = (e) => {
+  const handleCompareProducts = (e) => {
     e.preventDefault();
-    if (nonEmptyLinks.length) {
+    if (validLinks.length) {
       const params = new URLSearchParams();
-      nonEmptyLinks.forEach((link, index) => {
+      validLinks.forEach((link, index) => {
         const productId = extractProductId(link);
         if (productId) {
           params.append(`id${index + 1}`, productId);
           params.append(`url${index + 1}`, link);
         }
-      });window.open(`/compare?${params.toString()}`, "_blank");
-
+      });
+      window.open(`/compare?${params.toString()}`, "_blank");
     }
   };
 
-  const handleChat = (e) => {
-    e.preventDefault();
-    if (nonEmptyLinks.length) {
-      onChat(nonEmptyLinks);
-    }
-  };
+  const handleChatAboutProducts = (e) => {
+  e.preventDefault();
+
+  if (validLinks.length) {
+    const params = new URLSearchParams();
+
+    validLinks.forEach((link, index) => {
+      const productId = extractProductId(link);
+      if (productId) {
+        params.append(`id${index + 1}`, productId);
+        params.append(`url${index + 1}`, link);
+      }
+    });
+
+    window.open(`/compare/chat?${params.toString()}`, "_blank");
+
+    // Optional: trigger any additional chat logic
+    onChat(validLinks);
+  }
+};
+
 
   return (
-    <form className="link-form">
-      <h2 className="form-heading">Enter Walmart Product Links</h2>
+    <form className="link-input-form">
+      <h2 className="form-title">Walmart Product Link Analyzer</h2>
 
-      {links.map((link, index) => {
+      {productLinks.map((link, index) => {
         const productId = extractProductId(link);
         const encodedUrl = encodeURIComponent(link);
 
         return (
-          <div key={index} className="input-row">
+          <div key={index} className="link-input-group">
             <input
               type="url"
               required
-              placeholder={`Enter Link #${index + 1}`}
+              placeholder={`Product Link #${index + 1}`}
               value={link}
-              onChange={(e) => handleChange(index, e.target.value)}
-              className="link-input"
+              onChange={(e) => handleLinkChange(index, e.target.value)}
+              className="product-link-input"
             />
-            {links.length > 1 && (
+            {productLinks.length > 1 && (
               <button
                 type="button"
-                onClick={() => handleRemove(index)}
-                className="remove-btn"
+                onClick={() => handleRemoveLink(index)}
+                className="remove-link-btn"
               >
                 ✕
               </button>
@@ -82,40 +97,42 @@ const LinkInputForm = ({ onSubmit, onChat }) => {
             {productId && (
               <a
                 href={`/single/product/${productId}?url=${encodedUrl}`}
-                className="eda-link"
+                className="eda-visual-link"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Visual EDA of product {index + 1}
+                Visual EDA #{index + 1}
               </a>
             )}
           </div>
         );
       })}
 
-      {links.length < 3 && (
-        <button type="button" onClick={handleAddInput} className="add-btn">
-          + Add another link
+      {productLinks.length < 3 && (
+        <button type="button" onClick={handleAddLink} className="add-link-btn">
+          + Add Link
         </button>
       )}
 
-      <button
-        type="button"
-        className="submit-btn"
-        disabled={nonEmptyLinks.length === 0}
-        onClick={handleCompare}
-      >
-        COMPARE AGGREGATION
-      </button>
+      <div className="form-action-buttons">
+        <button
+          type="button"
+          className="action-btn"
+          disabled={validLinks.length === 0}
+          onClick={handleCompareProducts}
+        >
+          Compare Products
+        </button>
 
-      <button
-        type="button"
-        className="submit-btn"
-        disabled={nonEmptyLinks.length === 0}
-        onClick={handleChat}
-      >
-        CHAT ABOUT PRODUCT
-      </button>
+        <button
+          type="button"
+          className="action-btn"
+          disabled={validLinks.length === 0}
+          onClick={handleChatAboutProducts}
+        >
+          Chat About Products
+        </button>
+      </div>
     </form>
   );
 };

@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import useChatApi from "../../hooks/useChatApi.jsx";
 import Sidebar from "./chatPageSidebar.jsx";
 
-import { useParams } from "react-router-dom"; // make sure you have this
+import { useParams, useSearchParams, useLocation } from "react-router-dom"; // make sure you have this
 
 import Header from "./chatPageHeader.jsx";
 import ChatMessages from "./chatMessage.jsx";
@@ -22,9 +22,19 @@ import "../../styles/chatPageDark/chatMessageDark.css";
 import "../../styles/chatPageDark/chatInputDark.css";
 
 const ChatPage = () => {
-// Inside your component:
-const { productId } = useParams(); // extract product ID from URL
-console.log(productId)
+  // Inside your component:
+  const { search } = useLocation();
+  const query = new URLSearchParams(search);
+
+  const productIds = [];
+  for (let i = 1; i <= 3; i++) {
+    const id = query.get(`id${i}`);
+    if (id) productIds.push(id);
+  }
+  const [searchParams] = useSearchParams();
+
+  const productTitle = "";
+
   const [inputMessage, setInputMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [followUpQuestions, setFollowUpQuestions] = useState([]);
@@ -68,7 +78,10 @@ console.log(productId)
   // Load messages and followUps for a given chatId from cookies (but do NOT set currentChatId here)
   const loadChat = (chatId) => {
     const allChats = JSON.parse(Cookies.get("chatHistory") || "{}");
-    const chatData = allChats[chatId] || { messages: [], followUpQuestions: [] };
+    const chatData = allChats[chatId] || {
+      messages: [],
+      followUpQuestions: [],
+    };
 
     setMessages(chatData.messages);
     setFollowUpQuestions(chatData.followUpQuestions || []);
@@ -151,21 +164,24 @@ console.log(productId)
 
     // Refocus the input after a short delay
     setTimeout(() => inputRef.current?.focus(), 50);
-    console.log("herere",productId)
     const botResponse = await sendMessage({
       query: userMessage,
-      product_id: productId,
+      product_id: productIds.join(","), // "123,456"
     });
-    console.log(botResponse)
+
+    console.log(botResponse);
     if (!botResponse) {
-      const errorMessages = [...newMessages, { type: "bot", text: `Error: ${error}` }];
+      const errorMessages = [
+        ...newMessages,
+        { type: "bot", text: `Error: ${error}` },
+      ];
       setMessages(errorMessages);
       saveChatSessionToCookie(errorMessages, []);
       return;
     }
 
     // Destructure answer and followUpQuestions from your response
-    const {response} = botResponse;
+    const { response } = botResponse;
 
     // Add bot answer message with followUpQuestions included
     const finalMessages = [...newMessages, { type: "bot", text: response }];
@@ -185,22 +201,28 @@ console.log(productId)
     setTimeout(() => inputRef.current?.focus(), 50);
 
     const botResponse = await sendMessage(userMessage);
-    console.log(botResponse)
+    console.log(botResponse);
     if (!botResponse) {
-      const errorMessages = [...newMessages, { type: "bot", text: `Error: ${error}` }];
+      const errorMessages = [
+        ...newMessages,
+        { type: "bot", text: `Error: ${error}` },
+      ];
       setMessages(errorMessages);
       saveChatSessionToCookie(errorMessages, []);
       return;
     }
 
     // Destructure answer and followUpQuestions from your response
-    const { answer, follow_up_question} = botResponse;
+    const { answer, follow_up_question } = botResponse;
 
     // Add bot answer message with followUpQuestions included
-    const finalMessages = [...newMessages, { type: "bot", text: answer, follow_up_question }];
+    const finalMessages = [
+      ...newMessages,
+      { type: "bot", text: answer, follow_up_question },
+    ];
 
     setMessages(finalMessages);
-    setFollowUpQuestions(follow_up_question|| []);
+    setFollowUpQuestions(follow_up_question || []);
     saveChatSessionToCookie(finalMessages, follow_up_question || []);
   };
 
@@ -235,7 +257,6 @@ console.log(productId)
 
   return (
     <div className={`chat-container-main-${theme}`}>
-      
       <main className={`chat-container-${theme}`}>
         <div className={`chat-main-div-${theme}`}>
           <Header
@@ -277,6 +298,7 @@ console.log(productId)
             setMessages={setMessages}
             currentChatId={currentChatId}
             setCurrentChatId={setCurrentChatId}
+            productTitle={productTitle}
           />
         </div>
       </main>

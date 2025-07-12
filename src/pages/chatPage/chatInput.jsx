@@ -9,13 +9,14 @@ const ChatInput = ({
   isLoading,
   inputRef,
   messagesEndRef,
+  productTitle
 }) => {
   return (
     <div className={`input-container-main-${theme}`}>
       <div className={inputMessage.trim() === "" ?`input-container-${theme}`:`input-container-focus-${theme}` }>
         <div style={{ position: "relative" }}>
           <textarea
-            placeholder="Ask me about IIT (ISM) DHANBAD"
+            placeholder={`Ask me about product :-> ${productTitle.substring(0,200)}`}
             className={`chat-input-${theme}`}
             value={inputMessage}
             onChange={handleInputChange}

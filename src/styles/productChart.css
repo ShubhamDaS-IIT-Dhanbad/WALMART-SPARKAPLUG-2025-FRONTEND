@@ -1,0 +1,85 @@
+.product-charts-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.charts-column {
+  flex: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.urs-1{
+  width: 100vw;height: 70px;
+  display: flex;align-items: center;
+  margin-left: 50px;font-size: 30px;font-weight: 800;
+}
+.reviews-list {
+  list-style: none;
+  padding: 0;width: 100vw;
+  display: flex;flex-wrap: wrap;
+  justify-content: space-evenly;align-items: center;
+}
+
+.review-item {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border-left: 5px solid;max-width: 40vw;
+}
+
+.review-item.positive {
+  background-color: #e8f5e9;
+  border-color: #4CAF50;
+}
+
+.review-item.negative {
+  background-color: #ffebee;
+  border-color: #F44336;
+}
+
+.review-card {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  border-left: 6px solid;
+}
+
+.review-card.positive {
+  background-color: #e8f5e9;
+  border-color: #4CAF50;
+}
+
+.review-card.negative {
+  background-color: #ffebee;
+  border-color: #F44336;
+}
+
+.review-title {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.review-meta {
+  font-style: italic;
+  margin: 0.25rem 0;
+}
+
+.markdown-summary {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+}

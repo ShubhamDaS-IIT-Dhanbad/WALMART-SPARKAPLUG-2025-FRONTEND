@@ -28,14 +28,21 @@ const App = () => {
                 <SingleProductPage/>
             }
           />
-          <Route 
+          {/* <Route 
             path="/compare" 
             element={<CompareProductPage />} 
-          />
+          /> */}
 
           {/* User Routes */}
           <Route
            path="/chat/:productId"
+            element={
+                <ChatPage />
+            }
+          />
+
+          <Route
+           path="/compare/chat"
             element={
                 <ChatPage />
             }
