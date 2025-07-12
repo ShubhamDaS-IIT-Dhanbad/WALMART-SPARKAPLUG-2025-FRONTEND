@@ -41,7 +41,7 @@ const LinkInputForm = ({ onSubmit, onChat }) => {
           params.append(`url${index + 1}`, link);
         }
       });
-      window.open(`/compare?${params.toString()}`, "_blank");
+      window.open(`/compare/chat?${params.toString()}`, "_blank");
     }
   };
 
