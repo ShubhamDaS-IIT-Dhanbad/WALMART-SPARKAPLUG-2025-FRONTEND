@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const server = "https://walmart-sparkaplug-2025-backend-1.onrender.com";
+const server = "https://walmart-sparkaplug-2025-backend-1.onrender.com/productqa";
 
 const useChatApi = () => {
   const [isLoading, setIsLoading] = useState(false);
