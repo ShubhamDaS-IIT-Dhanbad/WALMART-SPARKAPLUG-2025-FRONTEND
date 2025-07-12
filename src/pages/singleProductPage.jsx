@@ -19,7 +19,7 @@ const SingleProductPage = () => {
       try {
         setLoading(true);
         const res = await axios.post(
-          "http://127.0.0.1:8000/singleproduct/analytics",
+          "https://walmart-sparkaplug-2025-backend-1.onrender.com/singleproduct/analytics",
           {
             product_id: productId,
             product_url: productUrl,

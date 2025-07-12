@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Cookies from "js-cookie";
 
 import logo from "../../assets/bot-icon.png"; // Replace with your product logo if available
@@ -108,7 +107,6 @@ const ChatMessages = ({
                         const match = /language-(\w+)/.exec(className || "");
                         return !inline && match ? (
                           <SyntaxHighlighter
-                            style={materialDark}
                             language={match[1]}
                             PreTag="div"
                             {...props}
