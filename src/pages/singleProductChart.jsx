@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-
+import WordBlob from "./blob.jsx";
 import {
   BarChart,
   Bar,
@@ -54,11 +54,11 @@ const calculateStats = (ratingDist) => {
 };
 
 const ProductCharts = ({ productData, ratingDist, data }) => {
+  console.log(data, productData, "datatattatt");
   const { productId } = useParams();
   const navigate = useNavigate();
 
   const handleChatClick = () => {
-    
     window.open(`/compare/chat?id1=${productId}`, "_blank");
 
     // navigate(`/chat/${productId}?title=${productData.title}`);
@@ -160,17 +160,17 @@ const ProductCharts = ({ productData, ratingDist, data }) => {
               </div>
               <div className="pc2-l2-rd">
                 <p className="pc2-l2-t-rd">TOTAL POSITIVE REVIEW</p>
-                <p className="pc2-l2-d-rd">40</p>
+                <p className="pc2-l2-d-rd">{productData?.tp}</p>
               </div>
               <div className="pc2-l2-rd">
                 <p className="pc2-l2-t-rd">TOTAL NEGATIVE REVIEW</p>
-                <p className="pc2-l2-d-rd">60</p>
+                <p className="pc2-l2-d-rd">{productData?.tn}</p>
               </div>
             </div>
 
             <div className="pc2-l2">
               <p className="pc2-l2-t">SATISFACTION SCORE</p>
-              <p className="pc2-l2-d">90 %</p>
+              <p className="pc2-l2-d">{productData?.ss} / 100</p>
             </div>
 
             <button className="chat-button" onClick={handleChatClick}>
@@ -193,6 +193,16 @@ const ProductCharts = ({ productData, ratingDist, data }) => {
               </li>
             )
           )}
+        </ul>
+      </div>
+      <div className="pc3-l2">
+        <ul className="spec-list">
+          {(data.specifications || []).map((spec, index) => (
+            <li key={index} className="spec-item">
+              <span className="spec-name">✔️ {spec.name}:</span>{" "}
+              <span className="spec-value">{spec.value}</span>
+            </li>
+          ))}
         </ul>
       </div>
 
@@ -300,11 +310,16 @@ const ProductCharts = ({ productData, ratingDist, data }) => {
           {renderReviewCard(data.top_negative_review, false)}
         </div>
 
+        <div>
+          <h1>Top Mentions Word Blob</h1>
+          <WordBlob mentions={data.top_mentions} />
+        </div>
+
         {/* <div className="wb">
           <WordBlob top_mentions={data.top_mentions} />
         </div> */}
 
-        <div className="urs"> 
+        <div className="urs">
           <div className="urs-1">USER REVIEW WITH SENTIMENT</div>
           <ul className="reviews-list">
             {customerReviews.map((review, idx) => (

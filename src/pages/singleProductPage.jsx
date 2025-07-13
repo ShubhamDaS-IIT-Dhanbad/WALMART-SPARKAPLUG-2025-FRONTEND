@@ -7,6 +7,8 @@ import "../styles/singleProductPage.css";
 
 const server = "https://walmart-sparkaplug-2025-backend-1.onrender.com";
 
+// const server = "http://127.0.0.1:8000";
+
 const SingleProductPage = () => {
   const { productId } = useParams();
   const location = useLocation();
