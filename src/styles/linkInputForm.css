@@ -1,114 +1,274 @@
-/* Container form */
-.link-input-form {
-  background: #1e1e2f;
-  padding: 2rem;
-  border-radius: 1rem;
-  max-width: 600px;
-  margin: 2rem auto;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  color: #ffffff;
+/* Walmart-inspired, modern, and vibrant styling for the Product Link Analyzer */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --walmart-blue: #0071CE;
+  --walmart-yellow: #FFC107;
+  --walmart-dark: #1A252F;
+  --walmart-light: #F8F9FA;
+  --walmart-gray: #6C757D;
+  --walmart-border: #E0E0E0;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.15);
 }
 
-/* Heading */
-.form-title {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, var(--walmart-light) 0%, #E3F2FD 100%);
+  min-height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  background: var(--walmart-blue);
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.header-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.header-subtitle {
+  font-size: 1.1rem;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.form-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.form-header {
   text-align: center;
   margin-bottom: 1.5rem;
-  font-size: 1.8rem;
-  font-weight: bold;
 }
 
-/* Input Row */
-.product-link-row {
+.form-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--walmart-dark);
+}
+
+.form-description {
+  font-size: 1rem;
+  color: var(--walmart-gray);
+  margin-top: 0.5rem;
+}
+
+.link-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.link-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.link-input-group {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
 }
 
-/* Input */
-.product-link-input {
+.link-input {
   flex: 1;
-  padding: 0.6rem 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid #444;
-  background-color: #2b2b3d;
-  color: white;
+  padding: 0.75rem;
   font-size: 1rem;
+  border: 1px solid var(--walmart-border);
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.product-link-input:focus {
+.link-input:focus {
   outline: none;
-  border-color: #4f46e5;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+  border-color: var(--walmart-blue);
+  box-shadow: 0 0 0 3px rgba(0, 113, 206, 0.2);
 }
 
-/* Remove button */
-.remove-link-btn {
-  background: #ff4d4f;
+.link-input::placeholder {
+  color: var(--walmart-gray);
+  opacity: 0.7;
+}
+
+.remove-btn {
+  background: #DC3545;
   color: white;
   border: none;
-  padding: 0.5rem 0.7rem;
-  font-size: 1rem;
   border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.remove-link-btn:hover {
-  background: #e63946;
+.remove-btn:hover {
+  background: #C82333;
+  transform: scale(1.1);
 }
 
-/* Visual EDA Link */
-.eda-link-btn {
-  margin-top: 0.3rem;
-  display: inline-block;
+.visual-link {
   font-size: 0.9rem;
-  color: #58a6ff;
+  color: var(--walmart-blue);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.visual-link:hover {
+  color: #005BB5;
   text-decoration: underline;
 }
 
-/* Add link button */
 .add-link-btn {
-  background: #10b981;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 0.5rem;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  margin-top: 1rem;
+  font-weight: 500;
+  color: var(--walmart-dark);
+  background: var(--walmart-yellow);
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  align-self: flex-start;
 }
 
 .add-link-btn:hover {
-  background: #0f9f6e;
+  background: #FFB300;
+  transform: translateY(-2px);
 }
 
-/* Action buttons (Compare / Chat) */
+.add-icon {
+  font-size: 1.2rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
 .action-btn {
-  width: 100%;
-  background: #4f46e5;
-  color: white;
-  padding: 0.8rem;
-  margin-top: 1rem;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 1.1rem;
+  flex: 1;
+  padding: 1rem;
+  font-size: 1rem;
   font-weight: 600;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.action-btn:hover {
-  background: #4338ca;
+.chat-btn {
+  background: var(--walmart-blue);
+  color: white;
+}
+
+.chat-btn:hover {
+  background: #005BB5;
+  transform: translateY(-2px);
+}
+
+.compare-btn {
+  background: var(--walmart-dark);
+  color: white;
+}
+
+.compare-btn:hover {
+  background: #2C3E50;
+  transform: translateY(-2px);
 }
 
 .action-btn:disabled {
-  background: #888;
+  background: var(--walmart-gray);
   cursor: not-allowed;
+  transform: none;
+}
+
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background: var(--walmart-dark);
+  color: white;
+  font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .header-title {
+    font-size: 2rem;
+  }
+
+  .form-card {
+    padding: 1.5rem;
+  }
+
+  .form-title {
+    font-size: 1.5rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-btn {
+    width: 100%;
+  }
 }
