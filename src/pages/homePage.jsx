@@ -236,7 +236,7 @@ function Home() {
       <div className={`home-${theme}`}>
         <div className={`home-left-${theme}`}>
           <div className={`home-left-1-${theme}`}>
-            Hi, it's <p>Walmart Buddy</p>
+            Hi, it's <p>NEURO CART</p>
           </div>
 
           <div className={`home-left-2-${theme}`}>
@@ -245,13 +245,15 @@ function Home() {
             </div>
           </div>
 
-          <p className={`home-left-3-1-${theme}`}>Welcome! 👋</p>
+          <p className={`home-left-3-1-${theme}`}>Welcome to NeuroCart! 👋</p>
           <p className={`home-left-3-${theme}`}>
-            This tool helps you analyze Walmart product reviews using advanced NLP techniques.
-            Track how positive and negative sentiments evolve over time. Compare product performance
-            based on customer feedback, and make smarter shopping decisions!
+        Your smart companion for analyzing and comparing Walmart products using advanced AI and NLP.
+This tool scrapes live product details, extracts reviews, tracks behavioral sentiment trends, and intelligently ranks multiple items — so you can make faster, smarter decisions.
+Explore in-depth EDA reports, review summaries, and unbiased comparisons/
+
           </p>
-          <p className={`home-left-3-2-${theme}`}>Start exploring the insights! 🔎</p>
+          <p className={`home-left-3-2-${theme}`}>
+Let’s navigate your choices with confidence.  🔎</p>
 
           <div className={`home-left-4-${theme}`}>
             <FaLinkedin className={`footer-icons-div-${theme}`} onClick={handleLinkedInClick} />

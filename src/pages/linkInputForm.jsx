@@ -53,9 +53,9 @@ const App = () => {
     <div className="app-container">
       <header className="header">
         <div className="header-content">
-          <h1 className="header-title">Walmart Product Link Analyzer</h1>
+          <h1 className="header-title">WALMART NEURO CART</h1>
           <p className="header-subtitle">
-            Compare and analyze Walmart products with ease
+           Next‑Gen AI Insights for Walmart Products—Compare, Analyze, Decide.
           </p>
         </div>
       </header>
