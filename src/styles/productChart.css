@@ -83,3 +83,179 @@
   padding: 1rem;
   border-radius: 8px;
 }
+
+
+
+
+
+
+/* Walmart-inspired professional design for charts and reviews */
+.charts-column {
+  background-color: #f8f9fa;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Flex container for charts */
+.charts-column > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Individual chart container */
+.cc1 {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e3e6e8;
+  transition: transform 0.2s;
+}
+
+.cc1:hover {
+  transform: translateY(-2px);
+}
+
+.cc1 h3 {
+  color: #004f9e; /* Walmart blue */
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Review highlight section */
+.review-highlight {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Review card styling (assuming renderReviewCard generates similar structure) */
+.review-card {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #e3e6e8;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-card.positive {
+  border-left: 4px solid #4CAF50;
+}
+
+.review-card.negative {
+  border-left: 4px solid #F44336;
+}
+
+/* Word blob section */
+.wb {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.wb h1 {
+  color: #004f9e;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+/* User reviews section */
+.urs {
+  margin-top: 20px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e3e6e8;
+}
+
+.urs-1 {
+  color: #004f9e;
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.reviews-list {
+  list-style: none;
+  padding: 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.review-item {
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.review-item.positive {
+  background-color: #e8f5e9;
+  border-left: 4px solid #4CAF50;
+}
+
+.review-item.negative {
+  background-color: #ffebee;
+  border-left: 4px solid #F44336;
+}
+
+.review-item p {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.review-item strong {
+  color: #004f9e;
+}
+
+/* Scrollbar styling for reviews list */
+.reviews-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.reviews-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.reviews-list::-webkit-scrollbar-thumb {
+  background: #0071ce;
+  border-radius: 4px;
+}
+
+.reviews-list::-webkit-scrollbar-thumb:hover {
+  background: #005bb5;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .charts-column {
+    padding: 10px;
+  }
+
+  .cc1 {
+    width: 100%;
+    margin-top: 10px !important;
+  }
+
+  .review-highlight {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .review-card {
+    width: 100%;
+  }
+}

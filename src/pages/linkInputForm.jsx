@@ -13,7 +13,7 @@ const App = () => {
   };
 
   const handleAddLink = () => {
-    if (productLinks.length < 3) {
+    if (productLinks.length < 5) {
       setProductLinks([...productLinks, '']);
     }
   };
@@ -118,7 +118,7 @@ const App = () => {
               );
             })}
 
-            {productLinks.length < 3 && (
+            {productLinks.length < 5 && (
               <button
                 type="button"
                 onClick={handleAddLink}
@@ -140,7 +140,7 @@ const App = () => {
               <button
                 type="button"
                 className="action-btn compare-btn"
-                disabled={validLinks.length < 2}
+                disabled={validLinks.length < 5}
                 onClick={(e) => handleAction(e, 'compare')}
               >
                 Compare Products
@@ -151,7 +151,7 @@ const App = () => {
       </main>
 
       <footer className="footer">
-        <p>Walmart Sparkaplug</p>
+        <p>Walmart Sparkathon</p>
       </footer>
     </div>
   );
