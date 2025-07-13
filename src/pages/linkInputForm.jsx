@@ -110,7 +110,6 @@ const App = () => {
                 target="_blank"
                 className="action-btn chat-btn"
                 disabled={validLinks.length === 0}
-                onClick={(e) => handleAction(e, 'chat')}
               >
                  View Visual Analysis #{index + 1}
               </a>

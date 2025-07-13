@@ -150,10 +150,7 @@ function Home() {
           </div>
 
           <div className={`home-left-br-${theme}`}>
-            <div
-              className={`theme-toggle-light-${theme} ${theme === "light" ? "active" : ""}`}
-              onClick={() => setTheme("light")}
-            ></div>
+            
             <div
               className={`theme-toggle-dark-${theme} ${theme === "dark" ? "active" : ""}`}
               onClick={() => setTheme("dark")}
