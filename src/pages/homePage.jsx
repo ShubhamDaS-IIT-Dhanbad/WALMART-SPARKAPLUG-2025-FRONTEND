@@ -236,7 +236,7 @@ function Home() {
       <div className={`home-${theme}`}>
         <div className={`home-left-${theme}`}>
           <div className={`home-left-1-${theme}`}>
-            Hi, it's <p>NEURO CART</p>
+            Hi, it's <p>NeuroCart</p>
           </div>
 
           <div className={`home-left-2-${theme}`}>
